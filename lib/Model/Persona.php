@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class Persona implements ModelInterface, ArrayAccess
 {
@@ -12,10 +12,10 @@ class Persona implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'Persona';
     
     protected static $apihubTypes = [
-        'nombre' => '\APIHub\Client\Model\Nombre',
-        'domicilio' => '\APIHub\Client\Model\Domicilio',
-        'empleo' => '\APIHub\Client\Model\Empleo',
-        'cuenta' => '\APIHub\Client\Model\Cuenta'
+        'nombre' => '\ReportarEnLinea\Client\Model\Nombre',
+        'domicilio' => '\ReportarEnLinea\Client\Model\Domicilio',
+        'empleo' => '\ReportarEnLinea\Client\Model\Empleo',
+        'cuenta' => '\ReportarEnLinea\Client\Model\Cuenta'
     ];
     
     protected static $apihubFormats = [

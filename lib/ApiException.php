@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client;
+namespace ReportarEnLinea\Client;
 
 use \Exception;
 

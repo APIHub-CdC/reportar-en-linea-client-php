@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client\Api;
+namespace ReportarEnLinea\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -8,10 +8,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use APIHub\Client\ApiException;
-use APIHub\Client\Configuration;
-use APIHub\Client\HeaderSelector;
-use APIHub\Client\ObjectSerializer;
+use ReportarEnLinea\Client\ApiException;
+use ReportarEnLinea\Client\Configuration;
+use ReportarEnLinea\Client\HeaderSelector;
+use ReportarEnLinea\Client\ObjectSerializer;
 
 class CargaDeCuentasDePersonasFsicasApi
 {
@@ -45,7 +45,7 @@ class CargaDeCuentasDePersonasFsicasApi
     
     public function registrarWithHttpInfo($x_api_key, $username, $password, $request)
     {
-        $returnType = '\APIHub\Client\Model\CargasResponse';
+        $returnType = '\ReportarEnLinea\Client\Model\CargasResponse';
         $request = $this->registrarRequest($x_api_key, $username, $password, $request);
         try {
             $options = $this->createHttpClientOption();
@@ -91,7 +91,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\CargasResponse',
+                        '\ReportarEnLinea\Client\Model\CargasResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -99,7 +99,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\ReportarEnLinea\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -107,7 +107,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\ReportarEnLinea\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -115,7 +115,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\ReportarEnLinea\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -123,7 +123,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\CargasPFRegistrarResponse',
+                        '\ReportarEnLinea\Client\Model\CargasPFRegistrarResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -131,7 +131,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\CargasResponse',
+                        '\ReportarEnLinea\Client\Model\CargasResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -139,7 +139,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\ReportarEnLinea\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -147,7 +147,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\CargasResponse',
+                        '\ReportarEnLinea\Client\Model\CargasResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -169,7 +169,7 @@ class CargaDeCuentasDePersonasFsicasApi
     
     public function registrarAsyncWithHttpInfo($x_api_key, $username, $password, $request)
     {
-        $returnType = '\APIHub\Client\Model\CargasResponse';
+        $returnType = '\ReportarEnLinea\Client\Model\CargasResponse';
         $request = $this->registrarRequest($x_api_key, $username, $password, $request);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -229,7 +229,7 @@ class CargaDeCuentasDePersonasFsicasApi
                 'Missing the required parameter $request when calling registrar'
             );
         }
-        $resourcePath = '';
+        $resourcePath = '/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -263,8 +263,14 @@ class CargaDeCuentasDePersonasFsicasApi
         }
         if (isset($_tempBody)) {
             $httpBody = $_tempBody;
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            
+            if($headers['Content-Type'] === 'application/json') {
+                if ($httpBody instanceof \stdClass) {
+                    $httpBody = \GuzzleHttp\json_encode($httpBody);
+                }
+                if(is_array($httpBody)) {
+                    $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($httpBody));
+                }
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

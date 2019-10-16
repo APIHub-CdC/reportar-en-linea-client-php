@@ -109,17 +109,11 @@ $this->signer = new \APIHub\Client\Interceptor\KeyHandler(
 ```
  > **NOTA:** Sólamente en caso de que el contenedor haya cifrado, se debe colocar la contraseña en una variable de ambiente e indicar el nombre de la misma, como se ve en la imagen anterior.
 
-### Paso 4. Modificar URL
+### Paso 4. Capturar los datos de la petición
 
- Modificar la URL de la petición en ***lib/Configuration.php*** en la línea 19, como se muestra en el siguiente fragmento de código:
+Los siguientes datos a modificar se encuentran en ***test/Api/CargaDeCuentasDePersonasFsicasApiTest.php***
 
- ```php
- protected $host = 'the_url';
- ```
-
-### Paso 5. Capturar los datos de la petición
-
-Es importante contar con el setUp() que se encargará de firmar y verificar la petición.
+Es importante contar con el setUp() que se encargará de inicializar la url, firmar y verificar la petición. Modificar la URL de la petición del objeto ***$config***, como se muestra en el siguiente fragmento de código:
 
 ```php
 <?php
@@ -133,7 +127,9 @@ public function setUp()
     $handler->push($events->verify_signature_header('x-signature'));
 
     $client = new \GuzzleHttp\Client(['handler' => $handler]);
-    $this->apiInstance = new \APIHub\Client\Api\CargaDeCuentasDePersonasFsicasApi($client);
+    $config = new \ReportarEnLinea\Client\Configuration();
+    $config->setHost('the_url');
+    $this->apiInstance = new \ReportarEnLinea\Client\Api\CargaDeCuentasDePersonasFsicasApi($client,$config);
 }    
 ```
 ```php
@@ -245,6 +241,11 @@ public function testRegistrar()
     $requestCuenta->setPlazoMeses(null);
     $requestCuenta->setMontoCreditoOriginacion(null);
     $requestCuenta->setCorreoElectronicoConsumidor(null);
+    $requestCuenta->setEstatusCan("01");
+    $requestCuenta->setOrdenPrelacionOrigen("01");
+    $requestCuenta->setOrdenPrelacionActual("01");
+    $requestCuenta->setFechaAperturaCan("YYYYMMDD");
+    $requestCuenta->setFechaCancelacionCan("null");    
 
     $requestPersona = new \APIHub\Client\Model\Persona();
     $requestPersona->setNombre($requestNombre);

@@ -1,10 +1,8 @@
 <?php
-namespace APIHub\Client\Interceptor;
-
+namespace ReportarEnLinea\Client\Interceptor;
 use \Monolog\Logger;
 use \Monolog\Formatter\LineFormatter;
 use \Monolog\Handler\StreamHandler;
-
 class MyLogger extends Logger
 {
 	
