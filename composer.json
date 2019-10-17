@@ -1,5 +1,5 @@
 {
-    "name": "/",
+    "name": "apihub-cdc/reportar-en-linea-client-php",
     "description": "",
     "keywords": [
         "apihub",
@@ -7,11 +7,12 @@
         "sdk",
         "api"
     ],
-    "homepage": "http://developer.circulodecredito.com.mx",
+    "homepage": "https://developer.circulodecredito.com.mx",
     "license": "proprietary",
     "authors": [
         {
             "name": "ReportarEnLinea and contributors",
+            "homepage": "https://github.com/APIHub-CdC"
         }
     ],
     "require": {
