@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class Cuenta implements ModelInterface, ArrayAccess
 {
@@ -50,7 +50,12 @@ class Cuenta implements ModelInterface, ArrayAccess
         'dias_vencimiento' => 'string',
         'plazo_meses' => 'string',
         'monto_credito_originacion' => 'string',
-        'correo_electronico_consumidor' => 'string'
+        'correo_electronico_consumidor' => 'string',
+        'estatus_can' => 'string',
+        'orden_prelacion_origen' => 'string',
+        'orden_prelacion_actual' => 'string',
+        'fecha_apertura_can' => 'string',
+        'fecha_cancelacion_can' => 'string'
     ];
     
     protected static $apihubFormats = [
@@ -92,7 +97,12 @@ class Cuenta implements ModelInterface, ArrayAccess
         'dias_vencimiento' => null,
         'plazo_meses' => null,
         'monto_credito_originacion' => null,
-        'correo_electronico_consumidor' => null
+        'correo_electronico_consumidor' => null,
+        'estatus_can' => null,
+        'orden_prelacion_origen' => null,
+        'orden_prelacion_actual' => null,
+        'fecha_apertura_can' => null,
+        'fecha_cancelacion_can' => null
     ];
     
     public static function swaggerTypes()
@@ -144,7 +154,12 @@ class Cuenta implements ModelInterface, ArrayAccess
         'dias_vencimiento' => 'diasVencimiento',
         'plazo_meses' => 'plazoMeses',
         'monto_credito_originacion' => 'montoCreditoOriginacion',
-        'correo_electronico_consumidor' => 'correoElectronicoConsumidor'
+        'correo_electronico_consumidor' => 'correoElectronicoConsumidor',
+        'estatus_can' => 'estatusCAN',
+        'orden_prelacion_origen' => 'ordenPrelacionOrigen',
+        'orden_prelacion_actual' => 'ordenPrelacionActual',
+        'fecha_apertura_can' => 'fechaAperturaCAN',
+        'fecha_cancelacion_can' => 'fechaCancelacionCAN'
     ];
     
     protected static $setters = [
@@ -186,7 +201,12 @@ class Cuenta implements ModelInterface, ArrayAccess
         'dias_vencimiento' => 'setDiasVencimiento',
         'plazo_meses' => 'setPlazoMeses',
         'monto_credito_originacion' => 'setMontoCreditoOriginacion',
-        'correo_electronico_consumidor' => 'setCorreoElectronicoConsumidor'
+        'correo_electronico_consumidor' => 'setCorreoElectronicoConsumidor',
+        'estatus_can' => 'setEstatusCan',
+        'orden_prelacion_origen' => 'setOrdenPrelacionOrigen',
+        'orden_prelacion_actual' => 'setOrdenPrelacionActual',
+        'fecha_apertura_can' => 'setFechaAperturaCan',
+        'fecha_cancelacion_can' => 'setFechaCancelacionCan'
     ];
     
     protected static $getters = [
@@ -228,7 +248,12 @@ class Cuenta implements ModelInterface, ArrayAccess
         'dias_vencimiento' => 'getDiasVencimiento',
         'plazo_meses' => 'getPlazoMeses',
         'monto_credito_originacion' => 'getMontoCreditoOriginacion',
-        'correo_electronico_consumidor' => 'getCorreoElectronicoConsumidor'
+        'correo_electronico_consumidor' => 'getCorreoElectronicoConsumidor',
+        'estatus_can' => 'getEstatusCan',
+        'orden_prelacion_origen' => 'getOrdenPrelacionOrigen',
+        'orden_prelacion_actual' => 'getOrdenPrelacionActual',
+        'fecha_apertura_can' => 'getFechaAperturaCan',
+        'fecha_cancelacion_can' => 'getFechaCancelacionCan'
     ];
     
     public static function attributeMap()
@@ -296,6 +321,11 @@ class Cuenta implements ModelInterface, ArrayAccess
         $this->container['plazo_meses'] = isset($data['plazo_meses']) ? $data['plazo_meses'] : null;
         $this->container['monto_credito_originacion'] = isset($data['monto_credito_originacion']) ? $data['monto_credito_originacion'] : null;
         $this->container['correo_electronico_consumidor'] = isset($data['correo_electronico_consumidor']) ? $data['correo_electronico_consumidor'] : null;
+        $this->container['estatus_can'] = isset($data['estatus_can']) ? $data['estatus_can'] : null;
+        $this->container['orden_prelacion_origen'] = isset($data['orden_prelacion_origen']) ? $data['orden_prelacion_origen'] : null;
+        $this->container['orden_prelacion_actual'] = isset($data['orden_prelacion_actual']) ? $data['orden_prelacion_actual'] : null;
+        $this->container['fecha_apertura_can'] = isset($data['fecha_apertura_can']) ? $data['fecha_apertura_can'] : null;
+        $this->container['fecha_cancelacion_can'] = isset($data['fecha_cancelacion_can']) ? $data['fecha_cancelacion_can'] : null;
     }
     
     public function listInvalidProperties()
@@ -534,6 +564,36 @@ class Cuenta implements ModelInterface, ArrayAccess
         }
         if (!is_null($this->container['correo_electronico_consumidor']) && (mb_strlen($this->container['correo_electronico_consumidor']) < 0)) {
             $invalidProperties[] = "invalid value for 'correo_electronico_consumidor', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['estatus_can']) && (mb_strlen($this->container['estatus_can']) > 2)) {
+            $invalidProperties[] = "invalid value for 'estatus_can', the character length must be smaller than or equal to 2.";
+        }
+        if (!is_null($this->container['estatus_can']) && (mb_strlen($this->container['estatus_can']) < 0)) {
+            $invalidProperties[] = "invalid value for 'estatus_can', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['orden_prelacion_origen']) && (mb_strlen($this->container['orden_prelacion_origen']) > 2)) {
+            $invalidProperties[] = "invalid value for 'orden_prelacion_origen', the character length must be smaller than or equal to 2.";
+        }
+        if (!is_null($this->container['orden_prelacion_origen']) && (mb_strlen($this->container['orden_prelacion_origen']) < 0)) {
+            $invalidProperties[] = "invalid value for 'orden_prelacion_origen', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['orden_prelacion_actual']) && (mb_strlen($this->container['orden_prelacion_actual']) > 2)) {
+            $invalidProperties[] = "invalid value for 'orden_prelacion_actual', the character length must be smaller than or equal to 2.";
+        }
+        if (!is_null($this->container['orden_prelacion_actual']) && (mb_strlen($this->container['orden_prelacion_actual']) < 0)) {
+            $invalidProperties[] = "invalid value for 'orden_prelacion_actual', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['fecha_apertura_can']) && (mb_strlen($this->container['fecha_apertura_can']) > 8)) {
+            $invalidProperties[] = "invalid value for 'fecha_apertura_can', the character length must be smaller than or equal to 8.";
+        }
+        if (!is_null($this->container['fecha_apertura_can']) && (mb_strlen($this->container['fecha_apertura_can']) < 0)) {
+            $invalidProperties[] = "invalid value for 'fecha_apertura_can', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['fecha_cancelacion_can']) && (mb_strlen($this->container['fecha_cancelacion_can']) > 8)) {
+            $invalidProperties[] = "invalid value for 'fecha_cancelacion_can', the character length must be smaller than or equal to 8.";
+        }
+        if (!is_null($this->container['fecha_cancelacion_can']) && (mb_strlen($this->container['fecha_cancelacion_can']) < 0)) {
+            $invalidProperties[] = "invalid value for 'fecha_cancelacion_can', the character length must be bigger than or equal to 0.";
         }
         return $invalidProperties;
     }
@@ -1203,6 +1263,91 @@ class Cuenta implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('invalid length for $correo_electronico_consumidor when calling Cuenta., must be bigger than or equal to 0.');
         }
         $this->container['correo_electronico_consumidor'] = $correo_electronico_consumidor;
+        return $this;
+    }
+    
+    public function getEstatusCan()
+    {
+        return $this->container['estatus_can'];
+    }
+    
+    public function setEstatusCan($estatus_can)
+    {
+        if (!is_null($estatus_can) && (mb_strlen($estatus_can) > 2)) {
+            throw new \InvalidArgumentException('invalid length for $estatus_can when calling Cuenta., must be smaller than or equal to 2.');
+        }
+        if (!is_null($estatus_can) && (mb_strlen($estatus_can) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $estatus_can when calling Cuenta., must be bigger than or equal to 0.');
+        }
+        $this->container['estatus_can'] = $estatus_can;
+        return $this;
+    }
+    
+    public function getOrdenPrelacionOrigen()
+    {
+        return $this->container['orden_prelacion_origen'];
+    }
+    
+    public function setOrdenPrelacionOrigen($orden_prelacion_origen)
+    {
+        if (!is_null($orden_prelacion_origen) && (mb_strlen($orden_prelacion_origen) > 2)) {
+            throw new \InvalidArgumentException('invalid length for $orden_prelacion_origen when calling Cuenta., must be smaller than or equal to 2.');
+        }
+        if (!is_null($orden_prelacion_origen) && (mb_strlen($orden_prelacion_origen) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $orden_prelacion_origen when calling Cuenta., must be bigger than or equal to 0.');
+        }
+        $this->container['orden_prelacion_origen'] = $orden_prelacion_origen;
+        return $this;
+    }
+    
+    public function getOrdenPrelacionActual()
+    {
+        return $this->container['orden_prelacion_actual'];
+    }
+    
+    public function setOrdenPrelacionActual($orden_prelacion_actual)
+    {
+        if (!is_null($orden_prelacion_actual) && (mb_strlen($orden_prelacion_actual) > 2)) {
+            throw new \InvalidArgumentException('invalid length for $orden_prelacion_actual when calling Cuenta., must be smaller than or equal to 2.');
+        }
+        if (!is_null($orden_prelacion_actual) && (mb_strlen($orden_prelacion_actual) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $orden_prelacion_actual when calling Cuenta., must be bigger than or equal to 0.');
+        }
+        $this->container['orden_prelacion_actual'] = $orden_prelacion_actual;
+        return $this;
+    }
+    
+    public function getFechaAperturaCan()
+    {
+        return $this->container['fecha_apertura_can'];
+    }
+    
+    public function setFechaAperturaCan($fecha_apertura_can)
+    {
+        if (!is_null($fecha_apertura_can) && (mb_strlen($fecha_apertura_can) > 8)) {
+            throw new \InvalidArgumentException('invalid length for $fecha_apertura_can when calling Cuenta., must be smaller than or equal to 8.');
+        }
+        if (!is_null($fecha_apertura_can) && (mb_strlen($fecha_apertura_can) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $fecha_apertura_can when calling Cuenta., must be bigger than or equal to 0.');
+        }
+        $this->container['fecha_apertura_can'] = $fecha_apertura_can;
+        return $this;
+    }
+    
+    public function getFechaCancelacionCan()
+    {
+        return $this->container['fecha_cancelacion_can'];
+    }
+    
+    public function setFechaCancelacionCan($fecha_cancelacion_can)
+    {
+        if (!is_null($fecha_cancelacion_can) && (mb_strlen($fecha_cancelacion_can) > 8)) {
+            throw new \InvalidArgumentException('invalid length for $fecha_cancelacion_can when calling Cuenta., must be smaller than or equal to 8.');
+        }
+        if (!is_null($fecha_cancelacion_can) && (mb_strlen($fecha_cancelacion_can) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $fecha_cancelacion_can when calling Cuenta., must be bigger than or equal to 0.');
+        }
+        $this->container['fecha_cancelacion_can'] = $fecha_cancelacion_can;
         return $this;
     }
     

@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class Errores implements ModelInterface, ArrayAccess
 {
@@ -12,7 +12,7 @@ class Errores implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'Errores';
     
     protected static $apihubTypes = [
-        'errores' => '\APIHub\Client\Model\Error[]'
+        'errores' => '\ReportarEnLinea\Client\Model\Error[]'
     ];
     
     protected static $apihubFormats = [

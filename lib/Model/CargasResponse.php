@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class CargasResponse implements ModelInterface, ArrayAccess
 {
@@ -12,7 +12,7 @@ class CargasResponse implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'CargasResponse';
     
     protected static $apihubTypes = [
-        'estatus' => '\APIHub\Client\Model\Estatus'
+        'estatus' => '\ReportarEnLinea\Client\Model\Estatus'
     ];
     
     protected static $apihubFormats = [

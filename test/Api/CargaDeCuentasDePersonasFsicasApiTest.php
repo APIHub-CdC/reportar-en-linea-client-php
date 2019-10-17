@@ -1,12 +1,12 @@
 <?php
-namespace APIHub\Client;
+namespace ReportarEnLinea\Client;
 
 use \GuzzleHttp\Client;
 use \GuzzleHttp\HandlerStack;
 
-use \APIHub\Client\ApiException;
-use \APIHub\Client\Interceptor\KeyHandler;
-use \APIHub\Client\Interceptor\MiddlewareEvents;
+use \ReportarEnLinea\Client\Configuration;
+use \ReportarEnLinea\Client\ApiException;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class CargaDeCuentasDePersonasFsicasApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,14 +14,18 @@ class CargaDeCuentasDePersonasFsicasApiTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $password = getenv('KEY_PASSWORD');
-        $this->signer = new \APIHub\Client\Interceptor\KeyHandler(null, null, $password);
-        $events = new \APIHub\Client\Interceptor\MiddlewareEvents($this->signer);
+        $this->signer = new \ReportarEnLinea\Client\Interceptor\KeyHandler(null, null, $password);
+        $events = new \ReportarEnLinea\Client\Interceptor\MiddlewareEvents($this->signer);
         $handler = \GuzzleHttp\HandlerStack::create();
         $handler->push($events->add_signature_header('x-signature'));
         $handler->push($events->verify_signature_header('x-signature'));
 
         $client = new \GuzzleHttp\Client(['handler' => $handler]);
-        $this->apiInstance = new \APIHub\Client\Api\CargaDeCuentasDePersonasFsicasApi($client);
+
+        $config = new \ReportarEnLinea\Client\Configuration();
+        $config->setHost('the_url');
+
+        $this->apiInstance = new \ReportarEnLinea\Client\Api\CargaDeCuentasDePersonasFsicasApi($client,$config);
     }
     
     public function testRegistrar()
@@ -126,18 +130,23 @@ class CargaDeCuentasDePersonasFsicasApiTest extends \PHPUnit_Framework_TestCase
         $requestCuenta->setPlazoMeses(null);
         $requestCuenta->setMontoCreditoOriginacion(null);
         $requestCuenta->setCorreoElectronicoConsumidor(null);
+        $requestCuenta->setEstatusCan("01");
+        $requestCuenta->setOrdenPrelacionOrigen("01");
+        $requestCuenta->setOrdenPrelacionActual("01");
+        $requestCuenta->setFechaAperturaCan("YYYYMMDD");
+        $requestCuenta->setFechaCancelacionCan("null");
 
-        $requestPersona = new \APIHub\Client\Model\Persona();
+        $requestPersona = new \ReportarEnLinea\Client\Model\Persona();
         $requestPersona->setNombre($requestNombre);
         $requestPersona->setDomicilio($requestDomicilio);
         $requestPersona->setEmpleo($requestEmpleo);
         $requestPersona->setCuenta($requestCuenta);
 
-        $requestEncabezado = new \APIHub\Client\Model\Encabezado();
+        $requestEncabezado = new \ReportarEnLinea\Client\Model\Encabezado();
         $requestEncabezado->setNombreOtorgante("OTORGANTE");
         $requestEncabezado->setClaveOtorgante("100000");
-
-        $request = new \APIHub\Client\Model\CargasPFRegistrarRequest();
+        
+        $request = new \ReportarEnLinea\Client\Model\CargasPFRegistrarRequest();
         $request->setEncabezado($requestEncabezado);
         $request->setPersona($requestPersona);
         try {

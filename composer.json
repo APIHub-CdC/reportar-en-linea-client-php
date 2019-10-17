@@ -1,5 +1,5 @@
 {
-    "name": "/",
+    "name": "apihub-cdc/reportar-en-linea-client-php",
     "description": "",
     "keywords": [
         "apihub",
@@ -7,7 +7,14 @@
         "sdk",
         "api"
     ],
-    "homepage": "http://developer.circulodecredito.com.mx",
+    "homepage": "https://developer.circulodecredito.com.mx",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "ReportarEnLinea and contributors",
+            "homepage": "https://github.com/APIHub-CdC"
+        }
+    ],
     "require": {
         "php": ">=5.5",
         "ext-curl": "*",
@@ -23,9 +30,9 @@
         "friendsofphp/php-cs-fixer": "~2.12"
     },
     "autoload": {
-        "psr-4": { "APIHub\\Client\\" : "lib/" }
+        "psr-4": { "ReportarEnLinea\\Client\\" : "lib/" }
     },
     "autoload-dev": {
-        "psr-4": { "APIHub\\Client\\" : "test/" }
+        "psr-4": { "ReportarEnLinea\\Client\\" : "test/" }
     }
 }
