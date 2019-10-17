@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \ReportarEnLinea\Client\ObjectSerializer;
 
 class CargasPFRegistrarRequest implements ModelInterface, ArrayAccess
 {
@@ -12,8 +12,8 @@ class CargasPFRegistrarRequest implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'CargasPFRegistrarRequest';
     
     protected static $apihubTypes = [
-        'encabezado' => '\APIHub\Client\Model\Encabezado',
-        'persona' => '\APIHub\Client\Model\Persona'
+        'encabezado' => '\ReportarEnLinea\Client\Model\Encabezado',
+        'persona' => '\ReportarEnLinea\Client\Model\Persona'
     ];
     
     protected static $apihubFormats = [

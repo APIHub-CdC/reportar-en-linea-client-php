@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace ReportarEnLinea\Client\Model;
 
 interface ModelInterface
 {

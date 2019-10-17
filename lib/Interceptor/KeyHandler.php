@@ -1,20 +1,18 @@
 <?php
     
-namespace APIHub\Client\Interceptor;
+namespace ReportarEnLinea\Client\Interceptor;
 
 use \Monolog\Logger;
 use \Monolog\Formatter\LineFormatter;
 use \Monolog\Handler\StreamHandler;
 
-use \APIHub\Client\Interceptor\MyLogger;
+use \ReportarEnLinea\Client\Interceptor\MyLogger;
 
 Class KeyHandler{
-
     private $private_key = null;
     private $public_key = null;
     private $logger = null;
-
-    public function __construct($keypair_route = null, $cdc_cert_route = null, $password = ""){
+    public function __construct($keypair_route = null, $cdc_cert_route = null, $password = "@Bc93"){
         $this->logger = new MyLogger('KeyHandler');
         
         $keypair_file = __DIR__."/keypair.p12";
@@ -27,7 +25,6 @@ Class KeyHandler{
         $this->logger->info("Keypair file is: ".$keypair_file);
         $this->logger->info("CDC certificate is: ".$cert_file);
         $pkcs12 = array();
-
         try{
             $file_pkcs12 = file_get_contents($keypair_file);
             if (isset($file_pkcs12)) {
@@ -35,6 +32,7 @@ Class KeyHandler{
                 if (isset($pkcs12['pkey'])) {
                     $this->logger->info("Private key loaded");
                     $this->private_key = openssl_pkey_get_private($pkcs12['pkey']);
+                    $this->logger->info("private_key is: ".$this->private_key);
                 }
                 else{
                     $this->logger->error("Could not read private key, please review your configuration");
@@ -60,7 +58,6 @@ Class KeyHandler{
             $this->logger->error('Exception at __construct: '.$e->getMessage().PHP_EOL);
         }
     }
-
     public function getSignatureFromPrivateKey($toSign){
         $signature_text = null;
         
@@ -85,10 +82,8 @@ Class KeyHandler{
         catch(Exception $e){
             $this->logger->error('Exception when calling getSignatureFromPrivateKey: '.$e->getMessage().PHP_EOL);
         }
-
         return $signature_text;
     }
-
     public function getVerificationFromPublicKey($data, $signature){
         $is_verified = false;
         try{
@@ -110,10 +105,8 @@ Class KeyHandler{
         
         return $is_verified;
     }
-
     public function close(){
         return openssl_free_key($this->private_key) && openssl_free_key($this->public_key);
     }
 }
-
 ?>
